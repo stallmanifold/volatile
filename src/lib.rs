@@ -1,5 +1,4 @@
 #![no_std]
-#![warn(dead_code)]
 
 mod volatile;
 
