@@ -2,4 +2,4 @@
 
 mod volatile;
 
-pub use volatile::Volatile;
+pub use volatile::VolatileCell;
