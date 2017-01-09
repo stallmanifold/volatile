@@ -43,5 +43,36 @@ impl<T> VolatileCell<T> where T: Copy {
 
 #[cfg(test)]
 mod tests {
+	use super::VolatileCell;
 
+	#[test]
+	fn test_get() {
+		let value = 1;
+		let cell = VolatileCell::new(value);
+		let got_value = cell.get();
+
+		assert_eq!(value, got_value);
+	}
+
+	#[test]
+	fn test_set() {
+		let value = 1;
+		let new_value = 2;
+		let cell = VolatileCell::new(value);
+
+		cell.set(new_value);
+		
+		assert_eq!(cell.get(), new_value);
+	}
+
+	#[test]
+	fn test_update() {
+		let mut value = 1;
+		let f = |val: &mut usize| { *val = *val + 4 };
+		let mut cell = VolatileCell::new(value);
+		f(&mut value);
+		cell.update(f);
+
+		assert_eq!(value, cell.get());
+	}
 }
